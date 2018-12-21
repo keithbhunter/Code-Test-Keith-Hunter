@@ -12,8 +12,11 @@
 		E799480C21CD369D00E17A77 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E799480A21CD369D00E17A77 /* Main.storyboard */; };
 		E799480E21CD369F00E17A77 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E799480D21CD369F00E17A77 /* Assets.xcassets */; };
 		E799481121CD369F00E17A77 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E799480F21CD369F00E17A77 /* LaunchScreen.storyboard */; };
-		E799481C21CD369F00E17A77 /* Code_Test_Keith_HunterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E799481B21CD369F00E17A77 /* Code_Test_Keith_HunterTests.swift */; };
 		E799482721CD369F00E17A77 /* Code_Test_Keith_HunterUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E799482621CD369F00E17A77 /* Code_Test_Keith_HunterUITests.swift */; };
+		E799483621CD39DB00E17A77 /* Contact.swift in Sources */ = {isa = PBXBuildFile; fileRef = E799483521CD39DB00E17A77 /* Contact.swift */; };
+		E799483A21CD3B1600E17A77 /* DataStoreTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E799483921CD3B1600E17A77 /* DataStoreTests.swift */; };
+		E799483C21CD3C8C00E17A77 /* DataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = E799483B21CD3C8C00E17A77 /* DataStore.swift */; };
+		E799484121CD529B00E17A77 /* FlatFileDataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = E799484021CD529B00E17A77 /* FlatFileDataStore.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -42,11 +45,14 @@
 		E799481021CD369F00E17A77 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		E799481221CD369F00E17A77 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E799481721CD369F00E17A77 /* Code Test Keith HunterTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Code Test Keith HunterTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
-		E799481B21CD369F00E17A77 /* Code_Test_Keith_HunterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Code_Test_Keith_HunterTests.swift; sourceTree = "<group>"; };
 		E799481D21CD369F00E17A77 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E799482221CD369F00E17A77 /* Code Test Keith HunterUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Code Test Keith HunterUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		E799482621CD369F00E17A77 /* Code_Test_Keith_HunterUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Code_Test_Keith_HunterUITests.swift; sourceTree = "<group>"; };
 		E799482821CD369F00E17A77 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		E799483521CD39DB00E17A77 /* Contact.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Contact.swift; sourceTree = "<group>"; };
+		E799483921CD3B1600E17A77 /* DataStoreTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataStoreTests.swift; sourceTree = "<group>"; };
+		E799483B21CD3C8C00E17A77 /* DataStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataStore.swift; sourceTree = "<group>"; };
+		E799484021CD529B00E17A77 /* FlatFileDataStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlatFileDataStore.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -97,6 +103,8 @@
 		E799480521CD369D00E17A77 /* Code Test Keith Hunter */ = {
 			isa = PBXGroup;
 			children = (
+				E799483721CD3AC100E17A77 /* Store */,
+				E799483421CD39C700E17A77 /* Model */,
 				E799480621CD369D00E17A77 /* AppDelegate.swift */,
 				E799480821CD369D00E17A77 /* ViewController.swift */,
 				E799480A21CD369D00E17A77 /* Main.storyboard */,
@@ -110,8 +118,8 @@
 		E799481A21CD369F00E17A77 /* Code Test Keith HunterTests */ = {
 			isa = PBXGroup;
 			children = (
-				E799481B21CD369F00E17A77 /* Code_Test_Keith_HunterTests.swift */,
 				E799481D21CD369F00E17A77 /* Info.plist */,
+				E799483921CD3B1600E17A77 /* DataStoreTests.swift */,
 			);
 			path = "Code Test Keith HunterTests";
 			sourceTree = "<group>";
@@ -123,6 +131,23 @@
 				E799482821CD369F00E17A77 /* Info.plist */,
 			);
 			path = "Code Test Keith HunterUITests";
+			sourceTree = "<group>";
+		};
+		E799483421CD39C700E17A77 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				E799483521CD39DB00E17A77 /* Contact.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		E799483721CD3AC100E17A77 /* Store */ = {
+			isa = PBXGroup;
+			children = (
+				E799483B21CD3C8C00E17A77 /* DataStore.swift */,
+				E799484021CD529B00E17A77 /* FlatFileDataStore.swift */,
+			);
+			path = Store;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -196,6 +221,7 @@
 					};
 					E799481621CD369F00E17A77 = {
 						CreatedOnToolsVersion = 10.1;
+						LastSwiftMigration = 1010;
 						TestTargetID = E799480221CD369D00E17A77;
 					};
 					E799482121CD369F00E17A77 = {
@@ -256,6 +282,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E799483621CD39DB00E17A77 /* Contact.swift in Sources */,
+				E799484121CD529B00E17A77 /* FlatFileDataStore.swift in Sources */,
+				E799483C21CD3C8C00E17A77 /* DataStore.swift in Sources */,
 				E799480921CD369D00E17A77 /* ViewController.swift in Sources */,
 				E799480721CD369D00E17A77 /* AppDelegate.swift in Sources */,
 			);
@@ -265,7 +294,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E799481C21CD369F00E17A77 /* Code_Test_Keith_HunterTests.swift in Sources */,
+				E799483A21CD3B1600E17A77 /* DataStoreTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -469,6 +498,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 45663MH36J;
 				INFOPLIST_FILE = "Code Test Keith HunterTests/Info.plist";
@@ -479,6 +509,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "com.github.keithbhunter.Code-Test-Keith-HunterTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Code Test Keith Hunter.app/Code Test Keith Hunter";
@@ -490,6 +522,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 45663MH36J;
 				INFOPLIST_FILE = "Code Test Keith HunterTests/Info.plist";
@@ -500,6 +533,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "com.github.keithbhunter.Code-Test-Keith-HunterTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "";
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Code Test Keith Hunter.app/Code Test Keith Hunter";
