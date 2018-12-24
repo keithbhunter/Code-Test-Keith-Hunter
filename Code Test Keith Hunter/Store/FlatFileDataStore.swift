@@ -10,6 +10,9 @@ import Foundation
 
 class FlatFileDataStore: DataStore {
     
+    /// Singleton instance of flat file data store to use in the app.
+    static let shared = FlatFileDataStore()
+    
     /// The directory where the flat file is stored.
     private let directory: URL
     

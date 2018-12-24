@@ -8,8 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		E799480721CD369D00E17A77 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E799480621CD369D00E17A77 /* AppDelegate.swift */; };
-		E799480921CD369D00E17A77 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E799480821CD369D00E17A77 /* ViewController.swift */; };
-		E799480C21CD369D00E17A77 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E799480A21CD369D00E17A77 /* Main.storyboard */; };
+		E799480921CD369D00E17A77 /* ContactListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E799480821CD369D00E17A77 /* ContactListViewController.swift */; };
 		E799480E21CD369F00E17A77 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E799480D21CD369F00E17A77 /* Assets.xcassets */; };
 		E799481121CD369F00E17A77 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E799480F21CD369F00E17A77 /* LaunchScreen.storyboard */; };
 		E799482721CD369F00E17A77 /* Code_Test_Keith_HunterUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E799482621CD369F00E17A77 /* Code_Test_Keith_HunterUITests.swift */; };
@@ -17,6 +16,10 @@
 		E799483A21CD3B1600E17A77 /* DataStoreTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E799483921CD3B1600E17A77 /* DataStoreTests.swift */; };
 		E799483C21CD3C8C00E17A77 /* DataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = E799483B21CD3C8C00E17A77 /* DataStore.swift */; };
 		E799484121CD529B00E17A77 /* FlatFileDataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = E799484021CD529B00E17A77 /* FlatFileDataStore.swift */; };
+		E799485421D178EE00E17A77 /* ContactSearcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = E799485321D178EE00E17A77 /* ContactSearcher.swift */; };
+		E799485621D1798400E17A77 /* ContactSearcherTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E799485521D1798400E17A77 /* ContactSearcherTests.swift */; };
+		E799485921D1829900E17A77 /* ContactListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E799485821D1829900E17A77 /* ContactListViewModel.swift */; };
+		E799485B21D1861600E17A77 /* ContactListViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E799485A21D1861600E17A77 /* ContactListViewModelTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -39,8 +42,7 @@
 /* Begin PBXFileReference section */
 		E799480321CD369D00E17A77 /* Code Test Keith Hunter.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Code Test Keith Hunter.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		E799480621CD369D00E17A77 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		E799480821CD369D00E17A77 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		E799480B21CD369D00E17A77 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		E799480821CD369D00E17A77 /* ContactListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactListViewController.swift; sourceTree = "<group>"; };
 		E799480D21CD369F00E17A77 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		E799481021CD369F00E17A77 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		E799481221CD369F00E17A77 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -53,6 +55,10 @@
 		E799483921CD3B1600E17A77 /* DataStoreTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataStoreTests.swift; sourceTree = "<group>"; };
 		E799483B21CD3C8C00E17A77 /* DataStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataStore.swift; sourceTree = "<group>"; };
 		E799484021CD529B00E17A77 /* FlatFileDataStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlatFileDataStore.swift; sourceTree = "<group>"; };
+		E799485321D178EE00E17A77 /* ContactSearcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactSearcher.swift; sourceTree = "<group>"; };
+		E799485521D1798400E17A77 /* ContactSearcherTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactSearcherTests.swift; sourceTree = "<group>"; };
+		E799485821D1829900E17A77 /* ContactListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactListViewModel.swift; sourceTree = "<group>"; };
+		E799485A21D1861600E17A77 /* ContactListViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactListViewModelTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -105,9 +111,8 @@
 			children = (
 				E799483721CD3AC100E17A77 /* Store */,
 				E799483421CD39C700E17A77 /* Model */,
+				E799485721D1827A00E17A77 /* Contact List */,
 				E799480621CD369D00E17A77 /* AppDelegate.swift */,
-				E799480821CD369D00E17A77 /* ViewController.swift */,
-				E799480A21CD369D00E17A77 /* Main.storyboard */,
 				E799480D21CD369F00E17A77 /* Assets.xcassets */,
 				E799480F21CD369F00E17A77 /* LaunchScreen.storyboard */,
 				E799481221CD369F00E17A77 /* Info.plist */,
@@ -120,6 +125,8 @@
 			children = (
 				E799481D21CD369F00E17A77 /* Info.plist */,
 				E799483921CD3B1600E17A77 /* DataStoreTests.swift */,
+				E799485521D1798400E17A77 /* ContactSearcherTests.swift */,
+				E799485A21D1861600E17A77 /* ContactListViewModelTests.swift */,
 			);
 			path = "Code Test Keith HunterTests";
 			sourceTree = "<group>";
@@ -148,6 +155,16 @@
 				E799484021CD529B00E17A77 /* FlatFileDataStore.swift */,
 			);
 			path = Store;
+			sourceTree = "<group>";
+		};
+		E799485721D1827A00E17A77 /* Contact List */ = {
+			isa = PBXGroup;
+			children = (
+				E799480821CD369D00E17A77 /* ContactListViewController.swift */,
+				E799485821D1829900E17A77 /* ContactListViewModel.swift */,
+				E799485321D178EE00E17A77 /* ContactSearcher.swift */,
+			);
+			path = "Contact List";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -257,7 +274,6 @@
 			files = (
 				E799481121CD369F00E17A77 /* LaunchScreen.storyboard in Resources */,
 				E799480E21CD369F00E17A77 /* Assets.xcassets in Resources */,
-				E799480C21CD369D00E17A77 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -283,9 +299,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				E799483621CD39DB00E17A77 /* Contact.swift in Sources */,
+				E799485421D178EE00E17A77 /* ContactSearcher.swift in Sources */,
 				E799484121CD529B00E17A77 /* FlatFileDataStore.swift in Sources */,
 				E799483C21CD3C8C00E17A77 /* DataStore.swift in Sources */,
-				E799480921CD369D00E17A77 /* ViewController.swift in Sources */,
+				E799480921CD369D00E17A77 /* ContactListViewController.swift in Sources */,
+				E799485921D1829900E17A77 /* ContactListViewModel.swift in Sources */,
 				E799480721CD369D00E17A77 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -294,7 +312,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E799485B21D1861600E17A77 /* ContactListViewModelTests.swift in Sources */,
 				E799483A21CD3B1600E17A77 /* DataStoreTests.swift in Sources */,
+				E799485621D1798400E17A77 /* ContactSearcherTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -322,14 +342,6 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		E799480A21CD369D00E17A77 /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				E799480B21CD369D00E17A77 /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		E799480F21CD369F00E17A77 /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (

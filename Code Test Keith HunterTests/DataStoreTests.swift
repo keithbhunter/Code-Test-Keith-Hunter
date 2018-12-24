@@ -14,9 +14,7 @@ class DataStoreTests: XCTestCase {
     private var dataStore: FlatFileDataStore!
     
     let one = Contact(id: 0, firstName: "John", lastName: "Johnson", dateOfBirth: Date(), addresses: [], phoneNumbers: ["1111111111"], emailAddresses: ["e@mail.com"])
-    
     let two = Contact(id: 1, firstName: "Jack", lastName: "Jackson", dateOfBirth: Date(), addresses: [], phoneNumbers: ["1111111111"], emailAddresses: ["e@mail.com"])
-    
     let three = Contact(id: 2, firstName: "Boaty", lastName: "McBoatface", dateOfBirth: Date(), addresses: [], phoneNumbers: ["1111111111"], emailAddresses: ["e@mail.com"])
     
     
