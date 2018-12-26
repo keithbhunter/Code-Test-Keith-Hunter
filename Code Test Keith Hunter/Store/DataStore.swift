@@ -85,7 +85,7 @@ extension DataStore {
         ]
         
         let contacts = names.map {
-            Contact(id: Int.random(in: 0 ... Int.max), firstName: $0.components(separatedBy: " ")[0], lastName: $0.components(separatedBy: " ")[1], dateOfBirth: Date(), addresses: [], phoneNumbers: ["1111111111"], emailAddresses: ["e@mail.com"])
+            Contact(id: Int.random(in: 0 ... Int.max), firstName: $0.components(separatedBy: " ")[0], lastName: $0.components(separatedBy: " ")[1], dateOfBirth: Date(timeIntervalSince1970: Double.random(in: 0 ... 1_000_000_000)), addresses: [], phoneNumbers: ["1111111111"], emailAddresses: ["e@mail.com"])
         }
         
         try deleteAll()

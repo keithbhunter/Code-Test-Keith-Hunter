@@ -8,19 +8,23 @@
 
 import UIKit
 
-final class ContactListViewController: UIViewController, UITableViewDataSource, UISearchResultsUpdating {
+final class ContactListViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UISearchResultsUpdating {
     
     private let store: DataStore
     private let searchController = UISearchController(searchResultsController: nil)
     private var hasSearchQuery: Bool { return (searchController.searchBar.text ?? "").count > 0 }
     private var contacts = [Contact]()
-    private var viewModel: ContactListViewModel?
+    
+    private var viewModel: ContactListViewModel {
+        didSet { tableView.reloadData() }
+    }
     
     
     // MARK: - Init
     
     init(store: DataStore) {
         self.store = store
+        viewModel = ContactListViewModel(contacts: [])
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -43,7 +47,6 @@ final class ContactListViewController: UIViewController, UITableViewDataSource, 
         
         contacts = store.fetchAllContacts().sorted { $0.firstName < $1.firstName }
         viewModel = ContactListViewModel(contacts: contacts)
-        tableView.reloadData()
     }
     
     
@@ -51,13 +54,7 @@ final class ContactListViewController: UIViewController, UITableViewDataSource, 
     
     private func setupTableView() {
         view.addSubview(tableView)
-        
-        NSLayoutConstraint.activate([
-            tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            tableView.topAnchor.constraint(equalTo: view.topAnchor),
-            tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
-        ])
+        NSLayoutConstraint.activate(tableView.constraints(equalTo: view))
     }
     
     private func setupSearchController() {
@@ -74,17 +71,17 @@ final class ContactListViewController: UIViewController, UITableViewDataSource, 
     // MARK: - UITableViewDataSource
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return viewModel?.numberOfSections ?? 0
+        return viewModel.numberOfSections
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return viewModel?.numberOfRows(inSection: section) ?? 0
+        return viewModel.numberOfRows(inSection: section)
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: UITableViewCell.self), for: indexPath)
         
-        if let contact = viewModel?.contact(at: indexPath) {
+        if let contact = viewModel.contact(at: indexPath) {
             cell.textLabel?.text = contact.firstName + " " + contact.lastName
         }
         
@@ -92,11 +89,21 @@ final class ContactListViewController: UIViewController, UITableViewDataSource, 
     }
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return viewModel?.title(forSection: section)
+        return viewModel.title(forSection: section)
     }
     
     func sectionIndexTitles(for tableView: UITableView) -> [String]? {
-        return viewModel?.sectionIndexTitles
+        return viewModel.sectionIndexTitles
+    }
+    
+    
+    // MARK: - UITableViewDelegate
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        guard let contact = viewModel.contact(at: indexPath) else { return }
+        
+        let viewController = ContactViewController(contact: contact)
+        show(viewController, sender: nil)
     }
     
     
@@ -107,7 +114,6 @@ final class ContactListViewController: UIViewController, UITableViewDataSource, 
         
         let results = ContactSearcher.search(contacts: contacts, for: query)
         viewModel = ContactListViewModel(contacts: results)
-        tableView.reloadData()
     }
     
     
@@ -119,6 +125,7 @@ final class ContactListViewController: UIViewController, UITableViewDataSource, 
         
         table.register(UITableViewCell.self, forCellReuseIdentifier: String(describing: UITableViewCell.self))
         table.dataSource = self
+        table.delegate = self
         
         return table
     }()
