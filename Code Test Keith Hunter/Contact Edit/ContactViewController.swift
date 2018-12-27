@@ -44,27 +44,48 @@ final class ContactViewController: UIViewController, UITableViewDataSource {
     // MARK: - UITableViewDataSource
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
+        return viewModel.numberOfSections
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 1
+        return viewModel.numberOfRows(inSection: section)
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: ContactHeaderCell.self), for: indexPath) as! ContactHeaderCell
-        viewModel.configure(headerCell: cell)
+        let cell: UITableViewCell
+        
+        switch indexPath.section {
+        case 0:
+            let headerCell = tableView.dequeueReusableCell(withIdentifier: String(describing: ContactHeaderCell.self), for: indexPath) as! ContactHeaderCell
+            viewModel.configure(headerCell: headerCell)
+            cell = headerCell
+        case 1:
+            cell = tableView.dequeueReusableCell(withIdentifier: String(describing: UITableViewCell.self), for: indexPath)
+            viewModel.configure(phoneNumberCell: cell, at: indexPath)
+        case 2:
+            cell = tableView.dequeueReusableCell(withIdentifier: String(describing: UITableViewCell.self), for: indexPath)
+            viewModel.configure(emailAddressCell: cell, at: indexPath)
+        default: fatalError("Unexpected section: \(indexPath.section)")
+        }
+        
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        return viewModel.title(forSection: section)
     }
     
     
     // MARK: - Views
     
     private lazy var tableView: UITableView = {
-        let table = UITableView()
+        let table = UITableView(frame: .zero, style: .grouped)
         table.translatesAutoresizingMaskIntoConstraints = false
+        table.contentInsetAdjustmentBehavior = .never
+        table.contentInset = UIEdgeInsets(top: 28, left: 0, bottom: 0, right: 0)
         
         table.register(ContactHeaderCell.self, forCellReuseIdentifier: String(describing: ContactHeaderCell.self))
+        table.register(UITableViewCell.self, forCellReuseIdentifier: String(describing: UITableViewCell.self))
         table.dataSource = self
         
         return table

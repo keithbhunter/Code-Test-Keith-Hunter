@@ -26,6 +26,8 @@
 		E799486721D40A3D00E17A77 /* ContactViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E799486621D40A3D00E17A77 /* ContactViewModel.swift */; };
 		E799486921D40AA100E17A77 /* ContactViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E799486821D40AA100E17A77 /* ContactViewModelTests.swift */; };
 		E799486B21D411DE00E17A77 /* UIScreen+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = E799486A21D411DE00E17A77 /* UIScreen+Extensions.swift */; };
+		E799486D21D56ABD00E17A77 /* PhoneNumber.swift in Sources */ = {isa = PBXBuildFile; fileRef = E799486C21D56ABD00E17A77 /* PhoneNumber.swift */; };
+		E799486F21D56B7400E17A77 /* PhoneNumberTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E799486E21D56B7400E17A77 /* PhoneNumberTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -72,6 +74,8 @@
 		E799486621D40A3D00E17A77 /* ContactViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactViewModel.swift; sourceTree = "<group>"; };
 		E799486821D40AA100E17A77 /* ContactViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactViewModelTests.swift; sourceTree = "<group>"; };
 		E799486A21D411DE00E17A77 /* UIScreen+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIScreen+Extensions.swift"; sourceTree = "<group>"; };
+		E799486C21D56ABD00E17A77 /* PhoneNumber.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhoneNumber.swift; sourceTree = "<group>"; };
+		E799486E21D56B7400E17A77 /* PhoneNumberTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhoneNumberTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -144,6 +148,7 @@
 				E799485521D1798400E17A77 /* ContactSearcherTests.swift */,
 				E799485A21D1861600E17A77 /* ContactListViewModelTests.swift */,
 				E799486821D40AA100E17A77 /* ContactViewModelTests.swift */,
+				E799486E21D56B7400E17A77 /* PhoneNumberTests.swift */,
 			);
 			path = "Code Test Keith HunterTests";
 			sourceTree = "<group>";
@@ -190,6 +195,7 @@
 				E799485F21D3FC8A00E17A77 /* ContactViewController.swift */,
 				E799486621D40A3D00E17A77 /* ContactViewModel.swift */,
 				E799486121D407FA00E17A77 /* ContactHeaderCell.swift */,
+				E799486C21D56ABD00E17A77 /* PhoneNumber.swift */,
 			);
 			path = "Contact Edit";
 			sourceTree = "<group>";
@@ -344,6 +350,7 @@
 				E799486221D407FA00E17A77 /* ContactHeaderCell.swift in Sources */,
 				E799483C21CD3C8C00E17A77 /* DataStore.swift in Sources */,
 				E799480921CD369D00E17A77 /* ContactListViewController.swift in Sources */,
+				E799486D21D56ABD00E17A77 /* PhoneNumber.swift in Sources */,
 				E799485921D1829900E17A77 /* ContactListViewModel.swift in Sources */,
 				E799480721CD369D00E17A77 /* AppDelegate.swift in Sources */,
 			);
@@ -355,6 +362,7 @@
 			files = (
 				E799485B21D1861600E17A77 /* ContactListViewModelTests.swift in Sources */,
 				E799486921D40AA100E17A77 /* ContactViewModelTests.swift in Sources */,
+				E799486F21D56B7400E17A77 /* PhoneNumberTests.swift in Sources */,
 				E799483A21CD3B1600E17A77 /* DataStoreTests.swift in Sources */,
 				E799485621D1798400E17A77 /* ContactSearcherTests.swift in Sources */,
 			);

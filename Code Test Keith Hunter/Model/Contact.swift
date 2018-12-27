@@ -17,7 +17,7 @@ struct Contact {
     var lastName: String
     var dateOfBirth: Date
     var addresses: [String]
-    var phoneNumbers: [String]
+    var phoneNumbers: [PhoneNumber]
     var emailAddresses: [String]
     
 }

@@ -11,9 +11,9 @@ import XCTest
 
 class ContactSearcherTests: XCTestCase {
     
-    private let one = Contact(id: 0, firstName: "John", lastName: "Johnson", dateOfBirth: Date(), addresses: [], phoneNumbers: ["1111111111"], emailAddresses: ["e@mail.com"])
-    private let two = Contact(id: 1, firstName: "Jack", lastName: "Jackson", dateOfBirth: Date(), addresses: [], phoneNumbers: ["1111111111"], emailAddresses: ["e@mail.com"])
-    private let three = Contact(id: 2, firstName: "Boaty", lastName: "McBoatface", dateOfBirth: Date(), addresses: [], phoneNumbers: ["1111111111"], emailAddresses: ["e@mail.com"])
+    private let one = Contact(id: 0, firstName: "John", lastName: "Johnson", dateOfBirth: Date(), addresses: [], phoneNumbers: [try! PhoneNumber("1111111111")], emailAddresses: ["e@mail.com"])
+    private let two = Contact(id: 1, firstName: "Jack", lastName: "Jackson", dateOfBirth: Date(), addresses: [], phoneNumbers: [try! PhoneNumber("1111111111")], emailAddresses: ["e@mail.com"])
+    private let three = Contact(id: 2, firstName: "Boaty", lastName: "McBoatface", dateOfBirth: Date(), addresses: [], phoneNumbers: [try! PhoneNumber("1111111111")], emailAddresses: ["e@mail.com"])
     private(set) lazy var contacts = [one, two, three]
     
     
