@@ -31,65 +31,8 @@ protocol DataStore {
 extension DataStore {
     
     func prepopulate() throws {
-        let names = [
-            "Weston Surber",
-            "Sabra Howlett",
-            "Ellan Delreal",
-            "Letisha Soderman",
-            "Youlanda Fischbach",
-            "Katina Overstreet",
-            "Karleen Gressett",
-            "Jennine Paquet",
-            "Britney Hoffer",
-            "Delmar Trickett",
-            "Fawn Uhlig",
-            "Kenisha Kennell",
-            "Pearle Lynde",
-            "Kati Bergen",
-            "Nellie Behringer",
-            "Earle Presswood",
-            "Coral Kleckner",
-            "Luella Parras",
-            "Valeria Meraz",
-            "Lasandra Tarkington",
-            "Rosamaria Cali",
-            "Celesta Wischmeier",
-            "Hayley Weymouth",
-            "Liana Kral",
-            "Lorenza Winfrey",
-            "Carter Cella",
-            "Hien Roberge",
-            "Shanelle Nolen",
-            "Modesta Boehman",
-            "Micheline Jager",
-            "Lulu Lamagna",
-            "Delana Alberto",
-            "Marlena Demoura",
-            "Sanora Tippin",
-            "Maria Orzechowski",
-            "Catherine Reavis",
-            "Cyndy Taggart",
-            "Awilda Loya",
-            "Denita Farrah",
-            "Edelmira Sellars",
-            "Mireille Hermanson",
-            "Micki Bumpus",
-            "Drew Balliet",
-            "Claris Hettinger",
-            "Dulce Artis",
-            "Eunice Angel",
-            "Joselyn Kieser",
-            "Eleanore Sharma",
-            "Almeta Zeledon",
-            "Marjory Gummer",
-        ]
-        
-        let contacts = names.map {
-            Contact(id: Int.random(in: 0 ... Int.max), firstName: $0.components(separatedBy: " ")[0], lastName: $0.components(separatedBy: " ")[1], dateOfBirth: Date(timeIntervalSince1970: Double.random(in: 0 ... 1_000_000_000)), addresses: [], phoneNumbers: [try! PhoneNumber("1111111111")], emailAddresses: ["e@mail.com"])
-        }
-        
         try deleteAll()
-        try contacts.forEach { try save(contact: $0) }
+        try Contact.random().forEach { try save(contact: $0) }
     }
     
 }
