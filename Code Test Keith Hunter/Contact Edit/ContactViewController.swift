@@ -6,9 +6,10 @@
 //  Copyright © 2018 Keith Hunter. All rights reserved.
 //
 
+import CoreLocation
 import UIKit
 
-final class ContactViewController: UIViewController, UITableViewDataSource {
+final class ContactViewController: UIViewController, UITableViewDelegate, ContactViewModelDelegate {
     
     private let viewModel: ContactViewModel
     
@@ -18,6 +19,8 @@ final class ContactViewController: UIViewController, UITableViewDataSource {
     init(contact: Contact) {
         viewModel = ContactViewModel(contact: contact)
         super.init(nibName: nil, bundle: nil)
+        viewModel.delegate = self
+        viewModel.getCoordinateOfAddress()
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -41,38 +44,23 @@ final class ContactViewController: UIViewController, UITableViewDataSource {
     }
     
     
-    // MARK: - UITableViewDataSource
+    // MARK: - UITableViewDelegate
     
-    func numberOfSections(in tableView: UITableView) -> Int {
-        return viewModel.numberOfSections
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return indexPath == viewModel.indexPathOfMap ? 250 : UITableView.automaticDimension
     }
     
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return viewModel.numberOfRows(inSection: section)
-    }
     
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell: UITableViewCell
-        
-        switch indexPath.section {
-        case 0:
-            let headerCell = tableView.dequeueReusableCell(withIdentifier: String(describing: ContactHeaderCell.self), for: indexPath) as! ContactHeaderCell
-            viewModel.configure(headerCell: headerCell)
-            cell = headerCell
-        case 1:
-            cell = tableView.dequeueReusableCell(withIdentifier: String(describing: UITableViewCell.self), for: indexPath)
-            viewModel.configure(phoneNumberCell: cell, at: indexPath)
-        case 2:
-            cell = tableView.dequeueReusableCell(withIdentifier: String(describing: UITableViewCell.self), for: indexPath)
-            viewModel.configure(emailAddressCell: cell, at: indexPath)
-        default: fatalError("Unexpected section: \(indexPath.section)")
+    // MARK: - ContactViewModelDelegate
+    
+    func viewModel(_ viewModel: ContactViewModel, foundAddressCoordinate coordinate: CLLocationCoordinate2D) {
+        DispatchQueue.main.async {
+            self.tableView.reloadSections([ContactViewModel.Section.address.rawValue], with: .none)
         }
-        
-        return cell
     }
     
-    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return viewModel.title(forSection: section)
+    func viewModelFailedToFindAddressCoordinate(_ viewModel: ContactViewModel) {
+        print("Unable to find coordinate")
     }
     
     
@@ -86,9 +74,64 @@ final class ContactViewController: UIViewController, UITableViewDataSource {
         
         table.register(ContactHeaderCell.self, forCellReuseIdentifier: String(describing: ContactHeaderCell.self))
         table.register(UITableViewCell.self, forCellReuseIdentifier: String(describing: UITableViewCell.self))
+        table.register(MapCell.self, forCellReuseIdentifier: String(describing: MapCell.self))
         table.dataSource = self
+        table.delegate = self
         
         return table
     }()
+    
+}
+
+extension ContactViewController: UITableViewDataSource {
+    
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return viewModel.numberOfSections
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return viewModel.numberOfRows(inSection: section)
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell: UITableViewCell
+        
+        guard let section = ContactViewModel.Section(rawValue: indexPath.section) else {
+            fatalError("Unexpected section: \(indexPath.section)")
+        }
+        
+        switch section {
+        case .header:
+            let headerCell = tableView.dequeueReusableCell(withIdentifier: String(describing: ContactHeaderCell.self), for: indexPath) as! ContactHeaderCell
+            viewModel.configure(headerCell: headerCell)
+            cell = headerCell
+            
+        case .phoneNumbers:
+            cell = tableView.dequeueReusableCell(withIdentifier: String(describing: UITableViewCell.self), for: indexPath)
+            viewModel.configure(phoneNumberCell: cell, at: indexPath)
+            
+        case .emailAddress:
+            cell = tableView.dequeueReusableCell(withIdentifier: String(describing: UITableViewCell.self), for: indexPath)
+            viewModel.configure(emailAddressCell: cell, at: indexPath)
+            
+        case .address:
+            if indexPath == viewModel.indexPathOfMap {
+                let mapCell = tableView.dequeueReusableCell(withIdentifier: String(describing: MapCell.self), for: indexPath) as! MapCell
+                viewModel.configure(mapCell: mapCell)
+                cell = mapCell
+            } else {
+                cell = tableView.dequeueReusableCell(withIdentifier: String(describing: UITableViewCell.self), for: indexPath)
+                viewModel.configure(addressCell: cell, at: indexPath)
+            }
+            
+        default: fatalError("Unexpected section: \(indexPath.section)")
+        }
+        
+        return cell
+    }
+    
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        return viewModel.title(forSection: section)
+    }
     
 }
