@@ -8,6 +8,11 @@
 
 /* Begin PBXBuildFile section */
 		E7399FFB21DBEE1900B4371C /* MapCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7399FFA21DBEE1900B4371C /* MapCell.swift */; };
+		E7399FFD21DBF16200B4371C /* TextFieldCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7399FFC21DBF16200B4371C /* TextFieldCell.swift */; };
+		E7399FFF21DBF41D00B4371C /* PhoneNumberFormatterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7399FFE21DBF41D00B4371C /* PhoneNumberFormatterTests.swift */; };
+		E739A00121DBF42C00B4371C /* PhoneNumberFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = E739A00021DBF42C00B4371C /* PhoneNumberFormatter.swift */; };
+		E739A00321DDAB0300B4371C /* DateOfBirthFormatterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E739A00221DDAB0300B4371C /* DateOfBirthFormatterTests.swift */; };
+		E739A00521DDAB0D00B4371C /* DateOfBirthFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = E739A00421DDAB0D00B4371C /* DateOfBirthFormatter.swift */; };
 		E799480721CD369D00E17A77 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E799480621CD369D00E17A77 /* AppDelegate.swift */; };
 		E799480921CD369D00E17A77 /* ContactListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E799480821CD369D00E17A77 /* ContactListViewController.swift */; };
 		E799480E21CD369F00E17A77 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E799480D21CD369F00E17A77 /* Assets.xcassets */; };
@@ -24,11 +29,7 @@
 		E799486021D3FC8A00E17A77 /* ContactViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E799485F21D3FC8A00E17A77 /* ContactViewController.swift */; };
 		E799486221D407FA00E17A77 /* ContactHeaderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E799486121D407FA00E17A77 /* ContactHeaderCell.swift */; };
 		E799486521D4088B00E17A77 /* UIView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = E799486421D4088B00E17A77 /* UIView+Extensions.swift */; };
-		E799486721D40A3D00E17A77 /* ContactViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E799486621D40A3D00E17A77 /* ContactViewModel.swift */; };
-		E799486921D40AA100E17A77 /* ContactViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E799486821D40AA100E17A77 /* ContactViewModelTests.swift */; };
 		E799486B21D411DE00E17A77 /* UIScreen+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = E799486A21D411DE00E17A77 /* UIScreen+Extensions.swift */; };
-		E799486D21D56ABD00E17A77 /* PhoneNumber.swift in Sources */ = {isa = PBXBuildFile; fileRef = E799486C21D56ABD00E17A77 /* PhoneNumber.swift */; };
-		E799486F21D56B7400E17A77 /* PhoneNumberTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E799486E21D56B7400E17A77 /* PhoneNumberTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -50,6 +51,11 @@
 
 /* Begin PBXFileReference section */
 		E7399FFA21DBEE1900B4371C /* MapCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapCell.swift; sourceTree = "<group>"; };
+		E7399FFC21DBF16200B4371C /* TextFieldCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldCell.swift; sourceTree = "<group>"; };
+		E7399FFE21DBF41D00B4371C /* PhoneNumberFormatterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhoneNumberFormatterTests.swift; sourceTree = "<group>"; };
+		E739A00021DBF42C00B4371C /* PhoneNumberFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhoneNumberFormatter.swift; sourceTree = "<group>"; };
+		E739A00221DDAB0300B4371C /* DateOfBirthFormatterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateOfBirthFormatterTests.swift; sourceTree = "<group>"; };
+		E739A00421DDAB0D00B4371C /* DateOfBirthFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateOfBirthFormatter.swift; sourceTree = "<group>"; };
 		E799480321CD369D00E17A77 /* Code Test Keith Hunter.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Code Test Keith Hunter.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		E799480621CD369D00E17A77 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E799480821CD369D00E17A77 /* ContactListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactListViewController.swift; sourceTree = "<group>"; };
@@ -73,11 +79,7 @@
 		E799485F21D3FC8A00E17A77 /* ContactViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactViewController.swift; sourceTree = "<group>"; };
 		E799486121D407FA00E17A77 /* ContactHeaderCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactHeaderCell.swift; sourceTree = "<group>"; };
 		E799486421D4088B00E17A77 /* UIView+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extensions.swift"; sourceTree = "<group>"; };
-		E799486621D40A3D00E17A77 /* ContactViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactViewModel.swift; sourceTree = "<group>"; };
-		E799486821D40AA100E17A77 /* ContactViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactViewModelTests.swift; sourceTree = "<group>"; };
 		E799486A21D411DE00E17A77 /* UIScreen+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIScreen+Extensions.swift"; sourceTree = "<group>"; };
-		E799486C21D56ABD00E17A77 /* PhoneNumber.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhoneNumber.swift; sourceTree = "<group>"; };
-		E799486E21D56B7400E17A77 /* PhoneNumberTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhoneNumberTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -149,8 +151,8 @@
 				E799483921CD3B1600E17A77 /* DataStoreTests.swift */,
 				E799485521D1798400E17A77 /* ContactSearcherTests.swift */,
 				E799485A21D1861600E17A77 /* ContactListViewModelTests.swift */,
-				E799486821D40AA100E17A77 /* ContactViewModelTests.swift */,
-				E799486E21D56B7400E17A77 /* PhoneNumberTests.swift */,
+				E7399FFE21DBF41D00B4371C /* PhoneNumberFormatterTests.swift */,
+				E739A00221DDAB0300B4371C /* DateOfBirthFormatterTests.swift */,
 			);
 			path = "Code Test Keith HunterTests";
 			sourceTree = "<group>";
@@ -195,10 +197,11 @@
 			isa = PBXGroup;
 			children = (
 				E799485F21D3FC8A00E17A77 /* ContactViewController.swift */,
-				E799486621D40A3D00E17A77 /* ContactViewModel.swift */,
 				E799486121D407FA00E17A77 /* ContactHeaderCell.swift */,
-				E799486C21D56ABD00E17A77 /* PhoneNumber.swift */,
 				E7399FFA21DBEE1900B4371C /* MapCell.swift */,
+				E7399FFC21DBF16200B4371C /* TextFieldCell.swift */,
+				E739A00021DBF42C00B4371C /* PhoneNumberFormatter.swift */,
+				E739A00421DDAB0D00B4371C /* DateOfBirthFormatter.swift */,
 			);
 			path = "Contact Edit";
 			sourceTree = "<group>";
@@ -344,8 +347,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				E799483621CD39DB00E17A77 /* Contact.swift in Sources */,
+				E739A00121DBF42C00B4371C /* PhoneNumberFormatter.swift in Sources */,
 				E799486B21D411DE00E17A77 /* UIScreen+Extensions.swift in Sources */,
-				E799486721D40A3D00E17A77 /* ContactViewModel.swift in Sources */,
 				E799486021D3FC8A00E17A77 /* ContactViewController.swift in Sources */,
 				E799486521D4088B00E17A77 /* UIView+Extensions.swift in Sources */,
 				E799485421D178EE00E17A77 /* ContactSearcher.swift in Sources */,
@@ -353,10 +356,11 @@
 				E799486221D407FA00E17A77 /* ContactHeaderCell.swift in Sources */,
 				E799483C21CD3C8C00E17A77 /* DataStore.swift in Sources */,
 				E799480921CD369D00E17A77 /* ContactListViewController.swift in Sources */,
-				E799486D21D56ABD00E17A77 /* PhoneNumber.swift in Sources */,
 				E799485921D1829900E17A77 /* ContactListViewModel.swift in Sources */,
+				E739A00521DDAB0D00B4371C /* DateOfBirthFormatter.swift in Sources */,
 				E7399FFB21DBEE1900B4371C /* MapCell.swift in Sources */,
 				E799480721CD369D00E17A77 /* AppDelegate.swift in Sources */,
+				E7399FFD21DBF16200B4371C /* TextFieldCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -365,10 +369,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				E799485B21D1861600E17A77 /* ContactListViewModelTests.swift in Sources */,
-				E799486921D40AA100E17A77 /* ContactViewModelTests.swift in Sources */,
-				E799486F21D56B7400E17A77 /* PhoneNumberTests.swift in Sources */,
+				E7399FFF21DBF41D00B4371C /* PhoneNumberFormatterTests.swift in Sources */,
 				E799483A21CD3B1600E17A77 /* DataStoreTests.swift in Sources */,
 				E799485621D1798400E17A77 /* ContactSearcherTests.swift in Sources */,
+				E739A00321DDAB0300B4371C /* DateOfBirthFormatterTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

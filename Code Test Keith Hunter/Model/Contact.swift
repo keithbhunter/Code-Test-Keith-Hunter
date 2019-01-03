@@ -15,9 +15,9 @@ struct Contact {
     let id: Int
     var firstName: String
     var lastName: String
-    var dateOfBirth: Date
+    var dateOfBirth: String
     var addresses: [String]
-    var phoneNumbers: [PhoneNumber]
+    var phoneNumbers: [String]
     var emailAddresses: [String]
     
 }
@@ -196,6 +196,9 @@ extension Contact {
     ]
     
     static func random() -> [Contact] {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "MM/dd/yyyy"
+        
         return zip(names, zip(phoneNumbers, addresses)).map { name, numberAndAddress in
             let firstName = name.components(separatedBy: " ")[0]
             let lastName = name.components(separatedBy: " ")[1]
@@ -205,9 +208,9 @@ extension Contact {
             return Contact(id: Int.random(in: 0 ... Int.max),
                            firstName: firstName,
                            lastName: lastName,
-                           dateOfBirth: Date(timeIntervalSince1970: Double.random(in: 0 ... 1_000_000_000)),
+                           dateOfBirth: formatter.string(from: Date(timeIntervalSince1970: Double.random(in: 0 ... 1_000_000_000))),
                            addresses: [address],
-                           phoneNumbers: [try! PhoneNumber(number)],
+                           phoneNumbers: [PhoneNumberFormatter().removeFormatting(from: number)],
                            emailAddresses: ["\(firstName.lowercased()).\(lastName.lowercased())@email.com"])
         }
     }

@@ -102,7 +102,7 @@ final class ContactListViewController: UIViewController, UITableViewDataSource, 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         guard let contact = viewModel.contact(at: indexPath) else { return }
         
-        let viewController = ContactViewController(contact: contact)
+        let viewController = ContactViewController(store: store, contact: contact)
         show(viewController, sender: nil)
     }
     
