@@ -12,13 +12,13 @@ import XCTest
 class ContactListViewModelTests: XCTestCase {
     
     private let contacts = [
-        Contact(id: 0, firstName: "Almeta", lastName: "Zeledon", dateOfBirth: Date(), addresses: [], phoneNumbers: [], emailAddresses: []),
-        Contact(id: 1, firstName: "Awilda", lastName: "Loya", dateOfBirth: Date(), addresses: [], phoneNumbers: [], emailAddresses: []),
-        Contact(id: 2, firstName: "Britney", lastName: "Hoffer", dateOfBirth: Date(), addresses: [], phoneNumbers: [], emailAddresses: []),
-        Contact(id: 3, firstName: "Coral", lastName: "Kleckner", dateOfBirth: Date(), addresses: [], phoneNumbers: [], emailAddresses: []),
-        Contact(id: 4, firstName: "Celesta", lastName: "Wischmeier", dateOfBirth: Date(), addresses: [], phoneNumbers: [], emailAddresses: []),
-        Contact(id: 5, firstName: "Carter", lastName: "Cella", dateOfBirth: Date(), addresses: [], phoneNumbers: [], emailAddresses: []),
-        Contact(id: 6, firstName: "Delana", lastName: "Alberto", dateOfBirth: Date(), addresses: [], phoneNumbers: [], emailAddresses: []),
+        Contact(firstName: "Almeta", lastName: "Zeledon", dateOfBirth: "11/22/1970", addresses: [], phoneNumbers: [], emailAddresses: []),
+        Contact(firstName: "Awilda", lastName: "Loya", dateOfBirth: "11/22/1970", addresses: [], phoneNumbers: [], emailAddresses: []),
+        Contact(firstName: "Britney", lastName: "Hoffer", dateOfBirth: "11/22/1970", addresses: [], phoneNumbers: [], emailAddresses: []),
+        Contact(firstName: "Coral", lastName: "Kleckner", dateOfBirth: "11/22/1970", addresses: [], phoneNumbers: [], emailAddresses: []),
+        Contact(firstName: "Celesta", lastName: "Wischmeier", dateOfBirth: "11/22/1970", addresses: [], phoneNumbers: [], emailAddresses: []),
+        Contact(firstName: "Carter", lastName: "Cella", dateOfBirth: "11/22/1970", addresses: [], phoneNumbers: [], emailAddresses: []),
+        Contact(firstName: "Delana", lastName: "Alberto", dateOfBirth: "11/22/1970", addresses: [], phoneNumbers: [], emailAddresses: []),
     ]
     
     private lazy var viewModel = ContactListViewModel(contacts: contacts)
@@ -42,9 +42,9 @@ class ContactListViewModelTests: XCTestCase {
     }
     
     func testContactsForIndexPath() {
-        let expected = Contact(id: 5, firstName: "Carter", lastName: "Cella", dateOfBirth: Date(), addresses: [], phoneNumbers: [], emailAddresses: [])
+        let expected = Contact(firstName: "Carter", lastName: "Cella", dateOfBirth: "11/22/1970", addresses: [], phoneNumbers: [], emailAddresses: [])
         let contact = viewModel.contact(at: IndexPath(row: 2, section: 2))
-        XCTAssertEqual(expected, contact)
+        XCTAssertEqual(expected.firstName, contact?.firstName)
     }
     
     func testSectionIndexTitles() {

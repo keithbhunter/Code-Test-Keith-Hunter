@@ -12,13 +12,23 @@ struct Contact {
     
     /// A unique identifier, since different people can have
     /// the same name, birthday, etc.
-    let id: Int
+    let id: String
     var firstName: String
     var lastName: String
     var dateOfBirth: String
     var addresses: [String]
     var phoneNumbers: [String]
     var emailAddresses: [String]
+    
+    init(id: String = UUID().uuidString, firstName: String = "", lastName: String = "", dateOfBirth: String = "", addresses: [String] = [], phoneNumbers: [String] = [], emailAddresses: [String] = []) {
+        self.id = id
+        self.firstName = firstName
+        self.lastName = lastName
+        self.dateOfBirth = dateOfBirth
+        self.addresses = addresses
+        self.phoneNumbers = phoneNumbers
+        self.emailAddresses = emailAddresses
+    }
     
 }
 
@@ -205,8 +215,7 @@ extension Contact {
             let number = numberAndAddress.0
             let address = numberAndAddress.1
             
-            return Contact(id: Int.random(in: 0 ... Int.max),
-                           firstName: firstName,
+            return Contact(firstName: firstName,
                            lastName: lastName,
                            dateOfBirth: formatter.string(from: Date(timeIntervalSince1970: Double.random(in: 0 ... 1_000_000_000))),
                            addresses: [address],

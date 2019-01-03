@@ -38,8 +38,11 @@ final class ContactListViewController: UIViewController, UITableViewDataSource, 
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
+        
         setupTableView()
         setupSearchController()
+        
+        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(presentContactViewController))
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -65,6 +68,14 @@ final class ContactListViewController: UIViewController, UITableViewDataSource, 
         navigationItem.searchController = searchController
         navigationItem.hidesSearchBarWhenScrolling = false
         definesPresentationContext = true
+    }
+    
+    
+    // MARK: Actions
+    
+    @objc private func presentContactViewController() {
+        let nav = UINavigationController(rootViewController: ContactViewController(store: store, contact: nil))
+        present(nav, animated: true)
     }
     
     

@@ -13,9 +13,9 @@ class DataStoreTests: XCTestCase {
     
     private var dataStore: FlatFileDataStore!
     
-    let one = Contact(id: 0, firstName: "John", lastName: "Johnson", dateOfBirth: Date(), addresses: [], phoneNumbers: ["1111111111"], emailAddresses: ["e@mail.com"])
-    let two = Contact(id: 1, firstName: "Jack", lastName: "Jackson", dateOfBirth: Date(), addresses: [], phoneNumbers: ["1111111111"], emailAddresses: ["e@mail.com"])
-    let three = Contact(id: 2, firstName: "Boaty", lastName: "McBoatface", dateOfBirth: Date(), addresses: [], phoneNumbers: ["1111111111"], emailAddresses: ["e@mail.com"])
+    let one = Contact(firstName: "John", lastName: "Johnson", dateOfBirth: "11/22/1970", addresses: [], phoneNumbers: ["1111111111"], emailAddresses: ["e@mail.com"])
+    let two = Contact(firstName: "Jack", lastName: "Jackson", dateOfBirth: "11/22/1970", addresses: [], phoneNumbers: ["1111111111"], emailAddresses: ["e@mail.com"])
+    let three = Contact(firstName: "Boaty", lastName: "McBoatface", dateOfBirth: "11/22/1970", addresses: [], phoneNumbers: ["1111111111"], emailAddresses: ["e@mail.com"])
     
     
     // MARK: - Setup
@@ -50,7 +50,7 @@ class DataStoreTests: XCTestCase {
     
     func testSaveContact() {
         do {
-            let contact = Contact(id: 3, firstName: "James", lastName: "Jamison", dateOfBirth: Date(), addresses: [], phoneNumbers: ["4444444444"], emailAddresses: ["e@mail.com"])
+            let contact = Contact(firstName: "James", lastName: "Jamison", dateOfBirth: "11/22/1970", addresses: [], phoneNumbers: ["4444444444"], emailAddresses: ["e@mail.com"])
             
             try dataStore.save(contact: contact)
             let contacts = dataStore.fetchAllContacts()
@@ -93,7 +93,7 @@ class DataStoreTests: XCTestCase {
         do {
             // It is feasible that two people could have the same name
             // and birthday; although rare. We need to account for that.
-            let similar = Contact(id: 10, firstName: one.firstName, lastName: one.lastName, dateOfBirth: one.dateOfBirth, addresses: one.addresses, phoneNumbers: one.phoneNumbers, emailAddresses: one.emailAddresses)
+            let similar = Contact(firstName: one.firstName, lastName: one.lastName, dateOfBirth: one.dateOfBirth, addresses: one.addresses, phoneNumbers: one.phoneNumbers, emailAddresses: one.emailAddresses)
             try dataStore.save(contact: similar)
             
             let contacts = dataStore.fetchAllContacts()

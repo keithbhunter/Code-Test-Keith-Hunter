@@ -10,6 +10,20 @@ import CoreLocation
 import MapKit
 import UIKit
 
+struct ContactValidationError: LocalizedError {
+    
+    static let addressCount = ContactValidationError(description: NSLocalizedString("You must enter one or more addresses.", comment: ""))
+    static let noName = ContactValidationError(description: NSLocalizedString("You must enter at least a first or last name.", comment: ""))
+    
+    var errorDescription: String? { return description }
+    private let description: String
+    
+    init(description: String) {
+        self.description = description
+    }
+    
+}
+
 final class ContactViewController: UIViewController, UITableViewDelegate {
     
     private enum Section: Int {
@@ -17,6 +31,7 @@ final class ContactViewController: UIViewController, UITableViewDelegate {
         case phoneNumbers
         case emailAddress
         case address
+        case delete
         // NOT TO BE USED! This is just for counting the sections
         case total
         
@@ -36,6 +51,7 @@ final class ContactViewController: UIViewController, UITableViewDelegate {
     private let store: DataStore
     private var contact: Contact
     private var editedContact: Contact
+    private let isAddingNewContact: Bool
     private var isEditingContact = false
     private var addressCoordinate: CLLocationCoordinate2D?
     private var indexPathOfSelectedAddress = IndexPath(row: 0, section: Section.address.rawValue)
@@ -47,13 +63,18 @@ final class ContactViewController: UIViewController, UITableViewDelegate {
     
     // MARK: Init
     
-    init(store: DataStore, contact: Contact) {
+    init(store: DataStore, contact: Contact?) {
         self.store = store
-        self.contact = contact
-        self.editedContact = contact
-        
+        self.contact = contact ?? Contact()
+        self.editedContact = self.contact
+        isAddingNewContact = contact == nil
+        isEditingContact = isAddingNewContact
+
         super.init(nibName: nil, bundle: nil)
-        getCoordinate(of: contact.addresses[0])
+        
+        if self.contact.addresses.count > 0 {
+            getCoordinate(of: self.contact.addresses[0])
+        }
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -67,7 +88,19 @@ final class ContactViewController: UIViewController, UITableViewDelegate {
         super.viewDidLoad()
         setupTableView()
         
-        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .edit, target: self, action: #selector(toggleEditState))
+        if isAddingNewContact {
+            navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(close))
+            navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(done))
+        } else {
+            navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .edit, target: self, action: #selector(toggleEditState))
+        }
+    }
+    
+    func showError(_ error: Error, withTitle title: String) {
+        let ok = NSLocalizedString("OK", comment: "")
+        let alert = UIAlertController(title: title, message: "\(error.localizedDescription)", preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: ok, style: .cancel))
+        present(alert, animated: true)
     }
     
     
@@ -98,6 +131,19 @@ final class ContactViewController: UIViewController, UITableViewDelegate {
     
     // MARK - Actions
     
+    @objc private func close() {
+        dismiss(animated: true)
+    }
+    
+    @objc private func done() {
+        do {
+            try validateAndSave(editedContact)
+            dismiss(animated: true)
+        } catch {
+            showError(error, withTitle: NSLocalizedString("Unable to Save", comment: ""))
+        }
+    }
+    
     @objc private func cancelEditing() {
         toggleEditState()
         editedContact = contact
@@ -110,6 +156,7 @@ final class ContactViewController: UIViewController, UITableViewDelegate {
     }
     
     @objc private func toggleEditState() {
+        guard !isAddingNewContact else { return }
         isEditingContact = !isEditingContact
         
         if isEditingContact {
@@ -130,16 +177,22 @@ final class ContactViewController: UIViewController, UITableViewDelegate {
                 getCoordinate(of: editedContact.addresses[indexPathOfSelectedAddress.row])
             }
             
-            try store.save(contact: editedContact)
+            try validateAndSave(editedContact)
             contact = editedContact
             tableView.reloadData()
         } catch {
-            let unableToSave = NSLocalizedString("Unable to Save", comment: "")
-            let ok = NSLocalizedString("OK", comment: "")
-            let alert = UIAlertController(title: unableToSave, message: "\(error)", preferredStyle: .alert)
-            alert.addAction(UIAlertAction(title: ok, style: .cancel))
-            present(alert, animated: true)
+            showError(error, withTitle: NSLocalizedString("Unable to Save", comment: ""))
         }
+    }
+    
+    private func validateAndSave(_ contact: Contact) throws {
+        if editedContact.firstName.isEmpty && editedContact.lastName.isEmpty {
+            throw ContactValidationError.noName
+        } else if editedContact.addresses.isEmpty {
+            throw ContactValidationError.addressCount
+        }
+        
+        try store.save(contact: contact)
     }
     
     
@@ -162,6 +215,15 @@ final class ContactViewController: UIViewController, UITableViewDelegate {
                 cell.accessoryType = .none
             }
         }
+        
+        if indexPath.section == Section.delete.rawValue {
+            do {
+                try store.delete(contact: contact)
+                navigationController?.popViewController(animated: true)
+            } catch {
+                showError(error, withTitle: NSLocalizedString("Unable to Delete", comment: ""))
+            }
+        }
     }
     
     
@@ -176,6 +238,7 @@ final class ContactViewController: UIViewController, UITableViewDelegate {
         table.register(ContactHeaderCell.self, forCellReuseIdentifier: String(describing: ContactHeaderCell.self))
         table.register(TextFieldCell.self, forCellReuseIdentifier: String(describing: TextFieldCell.self))
         table.register(MapCell.self, forCellReuseIdentifier: String(describing: MapCell.self))
+        table.register(UITableViewCell.self, forCellReuseIdentifier: String(describing: UITableViewCell.self))
         table.dataSource = self
         table.delegate = self
         
@@ -202,6 +265,7 @@ extension ContactViewController: UITableViewDataSource {
         case .address:
             let hasExtraRow = isEditingContact || addressCoordinate != nil
             return hasExtraRow ? editedContact.addresses.count + 1 : editedContact.addresses.count
+        case .delete: return isAddingNewContact ? 0 : 1
         default:
             assertionFailure("Unexpected section \(section)")
             return 0
@@ -223,7 +287,7 @@ extension ContactViewController: UITableViewDataSource {
             } else {
                 return addressCell(at: indexPath)
             }
-            
+        case .delete: return deleteCell(at: indexPath)
         default: fatalError("Unexpected section: \(indexPath.section)")
         }
     }
@@ -306,6 +370,15 @@ extension ContactViewController {
         annotation.coordinate = coord
         mapCell.map.addAnnotation(annotation)
         return mapCell
+    }
+    
+    private func deleteCell(at indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: UITableViewCell.self), for: indexPath)
+        cell.textLabel?.text = NSLocalizedString("Delete Contact", comment: "")
+        cell.textLabel?.textColor = .red
+        cell.selectionStyle = .none
+        cell.accessoryType = .none
+        return cell
     }
     
 }
