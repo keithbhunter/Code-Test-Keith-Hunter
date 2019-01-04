@@ -24,7 +24,7 @@ struct ContactValidationError: LocalizedError {
     
 }
 
-final class ContactViewController: UIViewController, UITableViewDelegate {
+final class ContactViewController: UIViewController {
     
     private enum Section: Int {
         case header
@@ -196,37 +196,6 @@ final class ContactViewController: UIViewController, UITableViewDelegate {
     }
     
     
-    // MARK: - UITableViewDelegate
-    
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        guard !isEditingContact else { return UITableView.automaticDimension }
-        return indexPath == indexPathOfMap ? 250 : UITableView.automaticDimension
-    }
-    
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if !isEditingContact && indexPath.section == Section.address.rawValue && indexPath != indexPathOfSelectedAddress && indexPath != indexPathOfMap {
-            indexPathOfSelectedAddress = indexPath
-            getCoordinate(of: contact.addresses[indexPath.row])
-            
-            if let cell = tableView.cellForRow(at: indexPath) {
-                cell.accessoryType = .checkmark
-            }
-            if let cell = tableView.cellForRow(at: indexPathOfSelectedAddress) {
-                cell.accessoryType = .none
-            }
-        }
-        
-        if indexPath.section == Section.delete.rawValue {
-            do {
-                try store.delete(contact: contact)
-                navigationController?.popViewController(animated: true)
-            } catch {
-                showError(error, withTitle: NSLocalizedString("Unable to Delete", comment: ""))
-            }
-        }
-    }
-    
-    
     // MARK: - Views
     
     fileprivate lazy var tableView: UITableView = {
@@ -298,6 +267,57 @@ extension ContactViewController: UITableViewDataSource {
     
 }
 
+extension ContactViewController: UITableViewDelegate {
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        guard !isEditingContact else { return UITableView.automaticDimension }
+        return indexPath == indexPathOfMap ? 250 : UITableView.automaticDimension
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if indexPath.section == Section.phoneNumbers.rawValue {
+            if let url = URL(string: "tel://\(contact.phoneNumbers[indexPath.row])"), UIApplication.shared.canOpenURL(url) {
+                UIApplication.shared.open(url)
+            }
+        }
+        
+        if indexPath.section == Section.emailAddress.rawValue {
+            if let url = URL(string: "mailto://\(contact.emailAddresses[indexPath.row])"), UIApplication.shared.canOpenURL(url) {
+                UIApplication.shared.open(url)
+            }
+        }
+        
+        if !isEditingContact && indexPath.section == Section.address.rawValue && indexPath != indexPathOfSelectedAddress && indexPath != indexPathOfMap {
+            indexPathOfSelectedAddress = indexPath
+            getCoordinate(of: contact.addresses[indexPath.row])
+            
+            if let cell = tableView.cellForRow(at: indexPath) {
+                cell.accessoryType = .checkmark
+            }
+            if let cell = tableView.cellForRow(at: indexPathOfSelectedAddress) {
+                cell.accessoryType = .none
+            }
+        }
+        
+        if let coord = addressCoordinate, indexPath == indexPathOfMap {
+            let placemark = MKPlacemark(coordinate: coord)
+            let mapItem = MKMapItem(placemark: placemark)
+            mapItem.name = contact.addresses[indexPathOfSelectedAddress.row]
+            mapItem.openInMaps(launchOptions: nil)
+        }
+        
+        if indexPath.section == Section.delete.rawValue {
+            do {
+                try store.delete(contact: contact)
+                navigationController?.popViewController(animated: true)
+            } catch {
+                showError(error, withTitle: NSLocalizedString("Unable to Delete", comment: ""))
+            }
+        }
+    }
+    
+}
+
 extension ContactViewController {
     
     private func headerCell(at indexPath: IndexPath) -> ContactHeaderCell {
@@ -305,9 +325,18 @@ extension ContactViewController {
         headerCell.firstNameTextField.text = editedContact.firstName
         headerCell.lastNameTextField.text = editedContact.lastName
         headerCell.dateOfBirthTextField.text = editedContact.dateOfBirth
+        headerCell.cameraIconView.isHidden = !isEditingContact
         headerCell.delegate = self
         headerCell.isUserInteractionEnabled = isEditingContact
         headerCell.selectionStyle = .none
+        
+        DispatchQueue.global().async {
+            let image = ContactPhotoStore.photo(for: self.contact)
+            DispatchQueue.main.async {
+                headerCell.profileImageView.image = image
+            }
+        }
+        
         return headerCell
     }
     
@@ -320,8 +349,9 @@ extension ContactViewController {
         }
         
         cell.textField.placeholder = NSLocalizedString("New Phone Number", comment: "")
+        cell.textField.textColor = isEditingContact ? .black : view.tintColor
         cell.delegate = self
-        cell.isUserInteractionEnabled = isEditingContact
+        cell.textField.isUserInteractionEnabled = isEditingContact
         cell.selectionStyle = .none
         cell.accessoryType = .none
         return cell
@@ -336,8 +366,9 @@ extension ContactViewController {
         }
         
         cell.textField.placeholder = NSLocalizedString("New Email Address", comment: "")
+        cell.textField.textColor = isEditingContact ? .black : view.tintColor
         cell.delegate = self
-        cell.isUserInteractionEnabled = isEditingContact
+        cell.textField.isUserInteractionEnabled = isEditingContact
         cell.selectionStyle = .none
         cell.accessoryType = .none
         return cell
@@ -462,7 +493,7 @@ extension ContactViewController: TextFieldCellDelegate {
     
 }
 
-extension ContactViewController: ContactHeaderCellDelegate {
+extension ContactViewController: ContactHeaderCellDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
     func contactHeaderCellTextDidChange(_ cell: ContactHeaderCell) {
         editedContact.firstName = cell.firstNameTextField.text ?? ""
@@ -483,6 +514,29 @@ extension ContactViewController: ContactHeaderCellDelegate {
         }
         
         return false
+    }
+    
+    func contactHeaderCellDidSelectProfileImage(_ cell: ContactHeaderCell) {
+        let imagePicker = UIImagePickerController()
+        imagePicker.delegate = self
+        present(imagePicker, animated: true)
+    }
+    
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        guard let image = info[UIImagePickerController.InfoKey.originalImage] as? UIImage, let fixedImage = image.fixOrientation() else {
+            return
+        }
+        
+        dismiss(animated: true) {
+            let headerIndexPath = IndexPath(row: 0, section: Section.header.rawValue)
+            if let cell = self.tableView.cellForRow(at: headerIndexPath) as? ContactHeaderCell {
+                cell.profileImageView.image = fixedImage
+            }
+        }
+        
+        DispatchQueue.global().async {
+            ContactPhotoStore.save(photo: fixedImage, for: self.contact)
+        }
     }
     
 }

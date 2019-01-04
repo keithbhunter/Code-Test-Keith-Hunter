@@ -13,6 +13,8 @@
 		E739A00121DBF42C00B4371C /* PhoneNumberFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = E739A00021DBF42C00B4371C /* PhoneNumberFormatter.swift */; };
 		E739A00321DDAB0300B4371C /* DateOfBirthFormatterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E739A00221DDAB0300B4371C /* DateOfBirthFormatterTests.swift */; };
 		E739A00521DDAB0D00B4371C /* DateOfBirthFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = E739A00421DDAB0D00B4371C /* DateOfBirthFormatter.swift */; };
+		E739A00721E005C200B4371C /* ContactPhotoStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = E739A00621E005C200B4371C /* ContactPhotoStore.swift */; };
+		E739A00B21E00A7C00B4371C /* UIImage+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = E739A00A21E00A7C00B4371C /* UIImage+Extensions.swift */; };
 		E799480721CD369D00E17A77 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E799480621CD369D00E17A77 /* AppDelegate.swift */; };
 		E799480921CD369D00E17A77 /* ContactListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E799480821CD369D00E17A77 /* ContactListViewController.swift */; };
 		E799480E21CD369F00E17A77 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E799480D21CD369F00E17A77 /* Assets.xcassets */; };
@@ -56,6 +58,8 @@
 		E739A00021DBF42C00B4371C /* PhoneNumberFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhoneNumberFormatter.swift; sourceTree = "<group>"; };
 		E739A00221DDAB0300B4371C /* DateOfBirthFormatterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateOfBirthFormatterTests.swift; sourceTree = "<group>"; };
 		E739A00421DDAB0D00B4371C /* DateOfBirthFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateOfBirthFormatter.swift; sourceTree = "<group>"; };
+		E739A00621E005C200B4371C /* ContactPhotoStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactPhotoStore.swift; sourceTree = "<group>"; };
+		E739A00A21E00A7C00B4371C /* UIImage+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Extensions.swift"; sourceTree = "<group>"; };
 		E799480321CD369D00E17A77 /* Code Test Keith Hunter.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Code Test Keith Hunter.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		E799480621CD369D00E17A77 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E799480821CD369D00E17A77 /* ContactListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactListViewController.swift; sourceTree = "<group>"; };
@@ -179,6 +183,7 @@
 			children = (
 				E799483B21CD3C8C00E17A77 /* DataStore.swift */,
 				E799484021CD529B00E17A77 /* FlatFileDataStore.swift */,
+				E739A00621E005C200B4371C /* ContactPhotoStore.swift */,
 			);
 			path = Store;
 			sourceTree = "<group>";
@@ -211,6 +216,7 @@
 			children = (
 				E799486A21D411DE00E17A77 /* UIScreen+Extensions.swift */,
 				E799486421D4088B00E17A77 /* UIView+Extensions.swift */,
+				E739A00A21E00A7C00B4371C /* UIImage+Extensions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -351,6 +357,7 @@
 				E799486B21D411DE00E17A77 /* UIScreen+Extensions.swift in Sources */,
 				E799486021D3FC8A00E17A77 /* ContactViewController.swift in Sources */,
 				E799486521D4088B00E17A77 /* UIView+Extensions.swift in Sources */,
+				E739A00721E005C200B4371C /* ContactPhotoStore.swift in Sources */,
 				E799485421D178EE00E17A77 /* ContactSearcher.swift in Sources */,
 				E799484121CD529B00E17A77 /* FlatFileDataStore.swift in Sources */,
 				E799486221D407FA00E17A77 /* ContactHeaderCell.swift in Sources */,
@@ -359,6 +366,7 @@
 				E799485921D1829900E17A77 /* ContactListViewModel.swift in Sources */,
 				E739A00521DDAB0D00B4371C /* DateOfBirthFormatter.swift in Sources */,
 				E7399FFB21DBEE1900B4371C /* MapCell.swift in Sources */,
+				E739A00B21E00A7C00B4371C /* UIImage+Extensions.swift in Sources */,
 				E799480721CD369D00E17A77 /* AppDelegate.swift in Sources */,
 				E7399FFD21DBF16200B4371C /* TextFieldCell.swift in Sources */,
 			);

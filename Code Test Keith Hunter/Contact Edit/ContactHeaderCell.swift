@@ -10,6 +10,7 @@ import UIKit
 
 @objc protocol ContactHeaderCellDelegate: NSObjectProtocol {
     
+    @objc optional func contactHeaderCellDidSelectProfileImage(_ cell: ContactHeaderCell)
     @objc optional func contactHeaderCellTextDidChange(_ cell: ContactHeaderCell)
     @objc optional func contactHeaderCellShouldBeginEditing(_ cell: ContactHeaderCell) -> Bool
     @objc optional func contactHeaderCellDidBeginEditing(_ cell: ContactHeaderCell)
@@ -108,6 +109,7 @@ final class ContactHeaderCell: UITableViewCell, UITextFieldDelegate {
     
     private func setupProfileImageView() {
         contentView.addSubview(profileImageView)
+        profileImageView.addSubview(cameraIconView)
         
         NSLayoutConstraint.activate([
             profileImageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: Attributes.padding),
@@ -116,7 +118,18 @@ final class ContactHeaderCell: UITableViewCell, UITextFieldDelegate {
             profileImageView.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
             profileImageView.widthAnchor.constraint(equalToConstant: Attributes.profileImageViewHeight),
             profileImageView.heightAnchor.constraint(equalToConstant: Attributes.profileImageViewHeight),
+            
+            cameraIconView.leadingAnchor.constraint(equalTo: profileImageView.leadingAnchor),
+            cameraIconView.trailingAnchor.constraint(equalTo: profileImageView.trailingAnchor),
+            cameraIconView.bottomAnchor.constraint(equalTo: profileImageView.bottomAnchor),
+            cameraIconView.heightAnchor.constraint(equalTo: profileImageView.heightAnchor, multiplier: 0.33),
         ])
+        
+        profileImageView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(profileImagePressed)))
+    }
+    
+    @objc private func profileImagePressed() {
+        delegate?.contactHeaderCellDidSelectProfileImage?(self)
     }
     
     
@@ -124,10 +137,10 @@ final class ContactHeaderCell: UITableViewCell, UITextFieldDelegate {
     
     override func prepareForReuse() {
         super.prepareForReuse()
-        profileImageView.image = nil
         firstNameTextField.text = nil
         lastNameTextField.text = nil
         dateOfBirthTextField.text = nil
+        cameraIconView.isHidden = true
     }
     
     
@@ -168,16 +181,26 @@ final class ContactHeaderCell: UITableViewCell, UITextFieldDelegate {
     
     // MARK: - Views
     
+    private(set) lazy var cameraIconView: UIImageView = {
+        let imageView = UIImageView(image: #imageLiteral(resourceName: "camera"))
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+        imageView.contentMode = .scaleAspectFit
+        imageView.backgroundColor = tintColor
+        imageView.tintColor = .white
+        imageView.isHidden = true
+        return imageView
+    }()
+    
     let profileImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.translatesAutoresizingMaskIntoConstraints = false
         imageView.contentMode = .scaleAspectFill
         imageView.tintColor = .black
+        imageView.isUserInteractionEnabled = true
         
         imageView.layer.cornerRadius = Attributes.profileImageViewHeight / 2
         imageView.layer.masksToBounds = true
-        imageView.layer.borderColor = UIColor.black.cgColor
-        imageView.layer.borderWidth = UIScreen.main.pixelWidth
+        imageView.backgroundColor = UIColor(red: 239/255, green: 239/255, blue: 244/255, alpha: 1)
         
         return imageView
     }()

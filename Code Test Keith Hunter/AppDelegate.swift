@@ -15,7 +15,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         let store = FlatFileDataStore.shared
-        try! store.prepopulate()
+        
+        if AppDefaults.firstUse {
+            try! store.prepopulate()
+            AppDefaults.firstUse = false
+        }
         
         window = UIWindow(frame: UIScreen.main.bounds)
         window?.rootViewController = UINavigationController(rootViewController: ContactListViewController(store: store))
@@ -24,4 +28,20 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         return true
     }
 
+}
+
+private struct AppDefaults {
+    
+    private static let firstUseKey = "isFirstUse"
+    
+    static var firstUse: Bool {
+        get {
+            guard let isFirstUse = UserDefaults.standard.object(forKey: AppDefaults.firstUseKey) as? Bool else {
+                return true
+            }
+            return isFirstUse
+        }
+        set { UserDefaults.standard.set(newValue, forKey: AppDefaults.firstUseKey) }
+    }
+    
 }
